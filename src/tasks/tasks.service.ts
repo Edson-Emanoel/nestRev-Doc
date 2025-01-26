@@ -1,8 +1,7 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Task } from './entities/task.entity';
-import { NotFoundError } from 'rxjs';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 @Injectable()
 export class TasksService {
@@ -32,8 +31,8 @@ export class TasksService {
         return this.tasks;
     }
 
-    findOne(id: string){
-        const task = this.tasks.find(task => task.id === Number(id))
+    findOne(id: number){
+        const task = this.tasks.find(task => task.id === id)
         
         if(task) return task
         
@@ -53,8 +52,8 @@ export class TasksService {
         return newTask;
     }
 
-    update(id: string, updateTaskDto: UpdateTaskDto){
-        const taskIndex = this.tasks.findIndex(task => task.id === Number(id));
+    update(id: number, updateTaskDto: UpdateTaskDto){
+        const taskIndex = this.tasks.findIndex(task => task.id === id);
 
         if(taskIndex < 0){
             throw new HttpException("Essa tarefa não existe :O Tente outra ^_^", HttpStatus.NOT_FOUND)         
@@ -73,7 +72,7 @@ export class TasksService {
 
     }
 
-    delete(id: string){
+    delete(id: number){
         const taskIndex = this.tasks.findIndex(task => task.id === Number(id));
 
         if(taskIndex < 0){
