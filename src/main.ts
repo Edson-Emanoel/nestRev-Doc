@@ -10,10 +10,10 @@ import { ValidationPipe } from '@nestjs/common';
 
 // 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
   app.useGlobalPipes(new ValidationPipe({
     whitelist: true, // Remove uma propriedade que não está no DTO
-    transform: true // Remove uma propriedade que não está no DTO
+    // transform: true // Remove uma propriedade que não está no DTO
   }))
   await app.listen(process.env.PORT ?? 3000);
 }

@@ -14,8 +14,6 @@ export class TasksController {
 
     @Get(":id")
     findOneTask(@Param('id', ParseIntPipe) id: number){
-        console.log(id);
-        console.log(typeof id);
         return this.taskService.findOne(id)
     }
 
@@ -33,5 +31,6 @@ export class TasksController {
     @Delete(":id")
     deleteTask(@Param('id', ParseIntPipe) id: number){
         return this.taskService.delete(id)
-    }   
+    }
+    
 }

@@ -4,19 +4,24 @@
 *     - Ele representa quais dados e em que formatos de uma determinada camada aceita e trabalha 
 */
 
-import { IsNotEmpty, IsString, MaxLength, MinLength } from "class-validator";
+import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
 
-export class CreateTaskDto {
+export class CreateUserDto {
 
-    @IsNotEmpty()
-    @IsString({ message: "O Nome precisa ser um texto" })
+    @IsString()
+    @IsOptional()
     @MinLength(5, { message: "O Nome precisa ter no minímo 5 carácteres" })
     readonly name: string;
     
-    @IsNotEmpty()
-    @IsString({ message: "O Nome precisa ser um texto" })
-    readonly description: string;
+    @IsString()
+    @IsOptional()
+    readonly password: string;
     
-    @IsNotEmpty()
-    readonly completed: boolean;
+    @IsString()
+    @IsOptional()
+    readonly email: string;
+    
+    @IsString()
+    @IsOptional()
+    readonly avatar: string;
 }
