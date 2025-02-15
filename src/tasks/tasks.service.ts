@@ -2,6 +2,7 @@ import { Task } from './entities/task.entity';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PrismaService } from '../prisma/prisma.service';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -17,14 +18,18 @@ export class TasksService {
         }
     ]
 
-    async findAll(){
-        try {
-            const allTasks = await this.prisma.task.findMany();
+    async findAll(paginationDto?: PaginationDto){
+        const { limit = 10, offset = 0 } = paginationDto || {};
 
-            return allTasks;
-        } catch (error) {
-            throw new HttpException("Falha ao listar todas tarefa!", HttpStatus.BAD_REQUEST)
-        }
+        const allTasks = await this.prisma.task.findMany({
+            take: limit,
+            skip: offset,
+            orderBy: {
+                createdAt: "desc"
+            }
+        })
+
+        return allTasks;
     }
 
     async findOne(id: number){
