@@ -8,6 +8,6 @@ export class AddHeaderInterceptor implements NestInterceptor {
           response.setHeader('X-Custom', 'Valor chave 123');
 
           return next.handle();
-          
+
       }
 }
