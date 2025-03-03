@@ -90,7 +90,7 @@ export class TasksService {
       return task;
     } catch (err) {
       throw new HttpException(
-        'Falha ao deletar essa tarefa!',
+        'Falha ao editar essa tarefa!',
         HttpStatus.BAD_REQUEST,
       );
     }

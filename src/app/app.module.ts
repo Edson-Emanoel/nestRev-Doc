@@ -5,10 +5,18 @@ import { AppController } from './app.controller';
 import { TasksModule } from 'src/tasks/tasks.module';
 import { UsersModule } from 'src/users/users.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { HashingServiceProtocol } from 'src/auth/hash/hashing.service';
 
 @Module({
-  imports: [TasksModule, UsersModule, ServeStaticModule.forRoot({ rootPath: join(__dirname, '..', '..', 'files'), serveRoot: "/files" })],
+  imports: [
+    TasksModule,
+    UsersModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', '..', 'files'),
+      serveRoot: '/files',
+    }),
+  ],
   controllers: [AppController],
-  providers: [AppService]
+  providers: [AppService],
 })
 export class AppModule {}
